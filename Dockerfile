@@ -5,13 +5,13 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy everything including source files and folders
+# Copy everything to the container's /src folder
 COPY . .
 
 # Restore dependencies
 RUN dotnet restore "FoodOrderApi.csproj"
 
-# Build
+# Build the project in Release configuration
 RUN dotnet build "FoodOrderApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
